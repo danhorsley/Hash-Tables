@@ -63,18 +63,42 @@ class HashTable:
         '''Remove the value stored with the given key.
         Print a warning if the key is not found.
         Fill this in.'''
-        pass
+        integer_find = self._hash_mod(key)
+        if self.storage[integer_find] is not None:
+            previous_node = None
+            current_node = self.storage[integer_find]
+            #check if key in first linked list
+            while current_node is not None:
+                if current_node.key == key:
+                    if previous_node is None:
+                        self.storage[integer_find] = None
+                    else:
+                        self.storage[integer_find] = current_node.next
+                    return print("value deleted")
+                previous_node = current_node
+                if current_node.next is not None:
+                    current_node = current_node.next
+                else:
+                    return print("key could not be found")
+        else:
+            return print("key could not be found")
+
+
+
 
 
     def retrieve(self, key):
-        '''
-        Retrieve the value stored with the given key.
-
+        '''Retrieve the value stored with the given key.
         Returns None if the key is not found.
-
-        Fill this in.
-        '''
-        pass
+        Fill this in.'''
+        integer_find = self._hash_mod(key)
+        if self.storage[integer_find] is not None:
+            current_node = self.storage[integer_find]
+            while current_node is not None:
+                if current_node.key == key:
+                    return current_node.value
+                current_node = current_node.next
+        return print("key could not be found")
 
 
     def resize(self):

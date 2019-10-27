@@ -25,14 +25,16 @@ class HashTable:
         '''
         return hash(key)
 
-
+    #def _hash(self, key):
     def _hash_djb2(self, key):
-        '''
-        Hash an arbitrary key using DJB2 hash
-
+        '''Hash an arbitrary key using DJB2 hash
         OPTIONAL STRETCH: Research and implement DJB2
         '''
-        pass
+        hash = 5380
+        for i in range(len(key)):
+            hash = hash * (33 ** i)
+
+        return hash
 
 
     def _hash_mod(self, key):

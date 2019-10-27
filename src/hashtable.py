@@ -47,15 +47,19 @@ class HashTable:
         '''Store the value with the given key.
         Hash collisions should be handled with Linked List Chaining.
         Fill this in.'''
-        my_integer = self._hash_mod(key)
-        new_linked_pair = LinkedPair(key,value)
-        if self.storage[my_integer] is None:
-          self.storage[my_integer] = new_linked_pair
+        if self.retrieve(key) is None : #== KeyError:
+            my_integer = self._hash_mod(key)
+            new_linked_pair = LinkedPair(key,value)
+            if self.storage[my_integer] is None:
+                self.storage[my_integer] = new_linked_pair
+            else:
+                placeholder = self.storage[my_integer]
+                while placeholder.next is not None:
+                    placeholder = placeholder.next
+                placeholder.next = new_linked_pair
         else:
-          placeholder = self.storage[my_integer]
-          while placeholder.next is not None:
-            placeholder = placeholder.next
-          placeholder.next = new_linked_pair
+            self.remove(key)
+            self.insert(key,value)
 
 
 
@@ -74,14 +78,15 @@ class HashTable:
                         self.storage[integer_find] = None
                     else:
                         self.storage[integer_find] = current_node.next
-                    return print("value deleted")
+                    return #print("value deleted")
                 previous_node = current_node
                 if current_node.next is not None:
                     current_node = current_node.next
                 else:
-                    return print("key could not be found")
+                    #print("value could not be found")
+                    return KeyError
         else:
-            return print("key could not be found")
+            return KeyError
 
 
 
@@ -98,16 +103,12 @@ class HashTable:
                 if current_node.key == key:
                     return current_node.value
                 current_node = current_node.next
-        return print("key could not be found")
+        return None #KeyError
 
 
     def resize(self):
-        '''
-        Doubles the capacity of the hash table and
-        rehash all key/value pairs.
-
-        Fill this in.
-        '''
+        '''Doubles the capacity of the hash table and
+        rehash all key/value pairs.Fill this in.'''
         pass
 
 

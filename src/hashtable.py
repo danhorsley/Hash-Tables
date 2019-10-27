@@ -44,25 +44,25 @@ class HashTable:
 
 
     def insert(self, key, value):
-        '''
-        Store the value with the given key.
-
+        '''Store the value with the given key.
         Hash collisions should be handled with Linked List Chaining.
-
-        Fill this in.
-        '''
-        pass
+        Fill this in.'''
+        my_integer = self._hash_mod(key)
+        new_linked_pair = LinkedPair(key,value)
+        if self.storage[my_integer] is None:
+          self.storage[my_integer] = new_linked_pair
+        else:
+          placeholder = self.storage[my_integer]
+          while placeholder.next is not None:
+            placeholder = placeholder.next
+          placeholder.next = new_linked_pair
 
 
 
     def remove(self, key):
-        '''
-        Remove the value stored with the given key.
-
+        '''Remove the value stored with the given key.
         Print a warning if the key is not found.
-
-        Fill this in.
-        '''
+        Fill this in.'''
         pass
 
 

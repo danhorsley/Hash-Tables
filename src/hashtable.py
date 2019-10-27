@@ -109,7 +109,20 @@ class HashTable:
     def resize(self):
         '''Doubles the capacity of the hash table and
         rehash all key/value pairs.Fill this in.'''
-        pass
+        self.capacity = self.capacity*2
+        new_storage = [None] * self.capacity
+        for item in self.storage:
+            while item is not None:
+                my_new_hash = self._hash_mod(item.key)
+                if new_storage[my_new_hash] is None:
+                    new_storage[my_new_hash] = LinkedPair(item.key,item.value)
+                else:
+                    placeholder = new_storage[my_new_hash]
+                    while placeholder.next is not None:
+                        placeholder = placeholder.next
+                    placeholder.next = LinkedPair(item.key,item.value)
+                item = item.next
+        self.storage = new_storage
 
 
 

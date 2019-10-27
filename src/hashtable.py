@@ -32,7 +32,7 @@ class HashTable:
         '''
         hash = 5380
         for i in range(len(key)):
-            hash = hash * (33 ** i)
+            hash = hash * (33 ** ord(key[i]))
 
         return hash
 
